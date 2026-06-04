@@ -13,7 +13,9 @@ app.get('/', (req, res) => {
         message: 'Welcome to the Node Admin Auth API'
     });
 });
+const authRoutes = require('./routes/authRoutes');
 
+app.use('/api/auth', authRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`url is http://localhost:${process.env.PORT}`);
 })
