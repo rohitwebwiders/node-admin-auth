@@ -45,6 +45,24 @@ class AuthService {
             }
         };
     }
+    async updateProfile(adminId, name, email, currentPassword, newPassword) {
+        const admin = await AdminRepository.findById(adminId);
+        if (!admin) {
+            throw new Error('Invalid credentials');
+        }
+        if (!bcrypt.compare(currentPassword, admin.password)) {
+            throw new Error('Invalid password');
+        }
+        const isPasswordValid = await bcrypt.compare(
+            currentPassword,
+            admin.password
+        );
+        if (!isPasswordValid) {
+            throw new Error('Invalid password');
+        }
+        const encryptedPassword = await bcrypt.hash(newPassword, 10);
+        await AdminRepository.updateProfile(admin.id, name, email, encryptedPassword);
+    }
 
 }
 

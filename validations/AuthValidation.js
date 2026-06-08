@@ -11,3 +11,22 @@ exports.loginValidation = [
         .notEmpty()
         .withMessage('Password is required')
 ];
+
+exports.updateProfileValidation = [
+    body('name')
+        .notEmpty()
+        .withMessage('Name is required')
+        .isLength({ min: 2, max: 50 })
+        .withMessage('Name must be between 2 and 50 characters'),
+    body('email')
+        .notEmpty()
+        .withMessage('Email is required')
+        .isEmail()
+        .withMessage('Invalid email'),
+    body('currentPassword')
+        .notEmpty()
+        .withMessage('Current password is required'),
+    body('newPassword')
+        .notEmpty()
+        .withMessage('New Password is required')
+]
