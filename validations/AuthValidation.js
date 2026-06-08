@@ -28,5 +28,16 @@ exports.updateProfileValidation = [
         .withMessage('Current password is required'),
     body('newPassword')
         .notEmpty()
-        .withMessage('New Password is required')
+        .withMessage('New Password is required'),
+    body('confirmNewPassword')
+        .notEmpty()
+        .withMessage('Confirm new password is required')
+        .isLength({ min: 6, max: 50 })
+        .withMessage('Password must be between 6 and 50 characters')
+        .custom((value, { req }) => {
+            if (value !== req.body.newPassword) {
+                throw new Error('Passwords do not match');
+            }
+            return true;
+        })
 ]

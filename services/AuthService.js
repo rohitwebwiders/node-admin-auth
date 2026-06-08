@@ -28,7 +28,8 @@ class AuthService {
         const token = jwt.sign(
             {
                 id: admin.id,
-                email: admin.email
+                email: admin.email,
+                name: admin.name
             },
             process.env.JWT_SECRET,
             {
