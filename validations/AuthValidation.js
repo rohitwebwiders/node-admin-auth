@@ -40,4 +40,12 @@ exports.updateProfileValidation = [
             }
             return true;
         })
+
+]
+exports.forgotPasswordValidation = [
+    body('email')
+        .notEmpty()
+        .withMessage('Email is required')
+        .isEmail()
+        .withMessage('Invalid email')
 ]
